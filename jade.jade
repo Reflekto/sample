@@ -1,0 +1,23 @@
+include ../icon/icon
+
+mixin accordion(data)
+	- data = data || {};
+
+	+b.accordion(class=data.type ? '_type_#{data.type}' : '').js-accordion&attributes(attributes)
+		each item in data.items
+			- var padClass = '_offset';
+			+e.wrap.js-accordion-wrap(id=item.id ? item.id : '')
+				+e.arrow
+					+icon('arrow').icon._arrow
+				if item.itemIcon
+					- padClass = '';
+					+e.icon-wrapper
+						+icon(item.itemIcon)(class='icon_#{item.itemIcon}')
+				if item.itemImage
+					- padClass = '';
+					+e.icon-wrapper
+						+e('img')(src=item.itemImage ? item.itemImage : '' class=item.itemImageClass ? 'icon_#{item.itemImageClass}' : '')
+				+e.title(class=padClass)!=item.title
+			+e('span').content(class=padClass).js-accordion-content
+				+e.content-wrap.js-accordion-content-wrap
+					+e.text!=item.text
