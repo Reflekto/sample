@@ -3,19 +3,19 @@
 require_once $_SERVER["DOCUMENT_ROOT"] . '/../vendor/autoload.php';
 
 use Symfony\Component\HttpFoundation\Request;
-use Aero\Rest\Controller as RestController;
-use Aero\Tools\Rest\Controller as MethodController;
-use Aero\Tools\Rest\Routes;
+use Keypoint\Rest\Controller as RestController;
+use Keypoint\Tools\Rest\Controller as MethodController;
+use Keypoint\Tools\Rest\Routes;
 use Bitrix\Main\Loader;
 
 $app = new Silex\Application();
 $app['debug'] = true;
 $baseURL = '/rest';
 
-if(!Loader::includeModule('aero.rest')) {
+if(!Loader::includeModule('keypoint.rest')) {
     $errorData = [
         "errorType" => "internal",
-        "errorMessage" => "Не подключен модуль aero.rest",
+        "errorMessage" => "Не подключен модуль keypoint.rest",
     ];
     return $app->json($errorData, 500);
 }
